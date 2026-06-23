@@ -1,0 +1,40 @@
+var CarController = pc.createScript('carController');
+
+CarController.prototype.initialize = function () {
+    this.speed = 10;
+    this.turnSpeed = 100;
+};
+
+CarController.prototype.update = function (dt) {
+
+    var forward = 0;
+    var turn = 0;
+
+    if (this.app.keyboard.isPressed(pc.KEY_UP)) {
+        forward = 1;
+    }
+
+    if (this.app.keyboard.isPressed(pc.KEY_DOWN)) {
+        forward = -1;
+    }
+
+    if (this.app.keyboard.isPressed(pc.KEY_LEFT)) {
+        turn = 1;
+    }
+
+    if (this.app.keyboard.isPressed(pc.KEY_RIGHT)) {
+        turn = -1;
+    }
+
+    this.entity.translateLocal(
+        0,
+        0,
+        forward * this.speed * dt
+    );
+
+    this.entity.rotateLocal(
+        0,
+        turn * this.turnSpeed * dt,
+        0
+    );
+};
